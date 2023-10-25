@@ -33,7 +33,7 @@ class Person {
   constructor(private key) {
     this.key = key;
   }
-  getKey(): Number {
+  getKey() {
     return this.key;
   }
 }
@@ -44,19 +44,26 @@ class House {
     this.key = key;
   }
   comeIn(person: Person): void {
-    if (this.door) this.tenants.push(person);
+    if (this.door) {
+      this.tenants.push(person);
+      console.log("Honey I'm Home");
+    } else {
+      console.log("Door is closed");
+    }
   }
   openDoor(key: Key): void {}
-  // showTenants(): void {
-  //   console.log(this.tenants);
-  // }
 }
 class MyHouse extends House {
   constructor(key: Key) {
     super(key);
   }
-  openDoor(key: Number | Key) {
-    if (this.key === key) this.door = true;
+  openDoor(key: Key): void {
+    if (this.key.getSignature() === key.getSignature()) {
+      this.door = true;
+      console.log("Key is valid. Door is opened");
+    } else {
+      console.log("Sorry. Key is invalid");
+    }
   }
 }
 
