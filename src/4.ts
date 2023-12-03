@@ -37,7 +37,7 @@ class Person {
     return this.key;
   }
 }
-class House {
+abstract class House {
   door: boolean = false;
   protected tenants: Array<Person> = [];
   constructor(public key: Key) {
@@ -51,7 +51,7 @@ class House {
       console.log("Door is closed");
     }
   }
-  openDoor(key: Key): void {}
+  abstract openDoor(key: Key): void;
 }
 class MyHouse extends House {
   constructor(key: Key) {
@@ -77,3 +77,29 @@ house.openDoor(person.getKey());
 house.comeIn(person);
 
 export {};
+
+// 1. Getter & Setter в TS. На курсах по JS нас учили, что геттер и сеттер всегда идут в паре. И что линтеры обычно ругаются если пары нет. В примере из конспекта по TS они используются по одиночке. В тайпскрпите это допустимо?
+// 2. В чем отличия интерфейса от абстрактного класса я гуглил, но не понятно когда и что использовать на практике
+// class Car {
+//   driver: Driver | null = null;
+//   setDriver(driver: Driver) {
+//     this.driver = driver;
+//   }
+//   startJourney() {
+//     if (this.driver) {
+//       this.driver.drive();
+//     }
+//   }
+// }
+// class Driver {
+//   drive() {
+//     console.log("Driving...");
+//   }
+// }
+// const driver = new Driver();
+// const car = new Car();
+// car.setDriver(driver);
+// car.startJourney();
+
+// 3. Когда на практике следует использовать type, а когда interface? Или просто придерживаться одной "стилистики" и этого достаточно?
+// Спасибо!!!
