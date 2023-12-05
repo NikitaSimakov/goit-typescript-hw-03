@@ -21,28 +21,22 @@
 
 // Наприклад, ось так:
 class Key {
-  private signature: Number;
-  constructor() {
-    this.signature = Math.floor(Math.random() * 1000);
-  }
+  private signature: Number = Math.floor(Math.random() * 1000);
+
   getSignature(): Number {
     return this.signature;
   }
 }
 class Person {
-  constructor(private key) {
-    this.key = key;
-  }
-  getKey() {
+  constructor(private key: Key) {}
+  getKey(): Key {
     return this.key;
   }
 }
 abstract class House {
-  door: boolean = false;
-  protected tenants: Array<Person> = [];
-  constructor(public key: Key) {
-    this.key = key;
-  }
+  protected door: boolean = false;
+  private tenants: Array<Person> = [];
+  constructor(protected key: Key) {}
   comeIn(person: Person): void {
     if (this.door) {
       this.tenants.push(person);
@@ -54,9 +48,6 @@ abstract class House {
   abstract openDoor(key: Key): void;
 }
 class MyHouse extends House {
-  constructor(key: Key) {
-    super(key);
-  }
   openDoor(key: Key): void {
     if (this.key.getSignature() === key.getSignature()) {
       this.door = true;
